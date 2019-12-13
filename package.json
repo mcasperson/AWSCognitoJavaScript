@@ -1,0 +1,8 @@
+{
+  "name": "AWSCognitoJavaScript",
+  "version": "1.0.0",
+  "dependencies": {
+    "amazon-cognito-auth-js": "^1.3.2",
+    "aws-amplify": "^2.2.0"
+  }
+}
