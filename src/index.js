@@ -9,7 +9,7 @@ Amplify.configure({
         userPoolId: 'us-east-1_o9NwDYe4q',
 
         // Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: '4h1rs6on5igul403mu5rui2fsh',
+        userPoolWebClientId: 'gi3jobbdupsil9d955rtc9v6r',
 
     }
 });
@@ -21,17 +21,20 @@ async function signIn(username, password, newPassword, success) {
             user,
             newPassword
         ).then((user) => {
-            success(user);
+            callApiGateway(user);
         }).catch((err) => {
             console.log('ERROR:', err);
         });
     } else {
-        success(user);
+        callApiGateway(user);
     }
 }
 
-async function callApiGateway(username, password, newPassword) {
-    await signIn(username, password, newPassword, (user) => {
-        console.log(user);
-    });
+function callApiGateway(user) {
+    console.log(user);
 }
+
+document.getElementById("login").onclick = () => signIn(
+    document.getElementById("username").value,
+    document.getElementById("password").value,
+    document.getElementById("newpassword").value);
