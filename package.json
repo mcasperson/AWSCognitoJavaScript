@@ -1,8 +1,14 @@
 {
   "name": "AWSCognitoJavaScript",
   "version": "1.0.0",
+  "private": true,
   "dependencies": {
     "amazon-cognito-auth-js": "^1.3.2",
-    "aws-amplify": "^2.2.0"
+    "aws-amplify": "^2.2.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }
