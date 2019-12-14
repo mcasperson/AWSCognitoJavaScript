@@ -32,6 +32,11 @@ async function signIn(username, password, newPassword, success) {
 
 function callApiGateway(user) {
     console.log(user);
+    user.getSession((err, session) => {
+        console.log(session);
+        console.log(session.accessToken.jwtToken);
+        console.log(session.idToken.jwtToken);
+    });
 }
 
 document.getElementById("login").onclick = () => signIn(
