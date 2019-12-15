@@ -1,5 +1,8 @@
 import Amplify, {Auth} from 'aws-amplify';
 
+/*
+    Configure the Amplify library with the details required to access a Cognito user pool
+ */
 Amplify.configure({
     Auth: {
         // Amazon Cognito Region
@@ -14,6 +17,13 @@ Amplify.configure({
     }
 });
 
+/**
+ * Attempt the initial login of a Cognito user. This may result in a password change
+ * form being displayed if required. Once logged in, the id and access tokens will
+ * be displayed.
+ * @param username The Cognito username
+ * @param password The Cognito password
+ */
 async function signIn(username, password) {
     const user = await Auth.signIn(username, password);
     if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
@@ -26,15 +36,19 @@ async function signIn(username, password) {
                 user,
                 newpassword.value
             ).then((user) => {
-                callApiGateway(user);
+                displayTokens(user);
             });
         };
     } else {
-        callApiGateway(user);
+        displayTokens(user);
     }
 }
 
-function callApiGateway(user) {
+/**
+ * Display the id and access tokens from the logged in Cognito user
+ * @param user The CognitoUser returned as a result of a successful login
+ */
+function displayTokens(user) {
     initiallogin.style.display = "none";
     changepassword.style.display = "none";
     results.style.display = "";
@@ -45,4 +59,7 @@ function callApiGateway(user) {
     });
 }
 
+/*
+    Attach an event handler to the login click event
+ */
 login.onclick = () => signIn(username.value, password.value);
