@@ -3,18 +3,37 @@
 
 </head>
 <body>
-<label>Username</label>
-<input id="username"
-       type="text"/>
-<label>Password</label>
-<input id="password"
-       type="text"/>
-<label>New Password</label>
-<input id="newpassword"
-       type="text"/>
-<input id="login"
-       type="button"
-       value="Login"/>
+<div id="initiallogin">
+    <label>Username</label>
+    <input id="username"
+           type="text"/>
+    <label>Password</label>
+    <input id="password"
+           type="text"/>
+    <input id="login"
+           type="button"
+           value="Login"/>
+</div>
+<div id="changepassword"
+     style="display: none">
+    <label>New Password</label>
+    <input id="newpassword"
+           type="text"/>
+    <input id="changepass"
+           type="button"
+           value="Change Password"/>
+</div>
+<div id="results"
+     style="display: none">
+    <h3>ID Token</h3>
+    <textarea cols="100"
+              id="idToken"
+              rows="15"></textarea>
+    <h3>Access Token</h3>
+    <textarea cols="100"
+              id="accessToken"
+              rows="15"></textarea>
+</div>
 <script src="main.js"></script>
 </body>
 </html>

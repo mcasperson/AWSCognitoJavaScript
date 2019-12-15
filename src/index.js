@@ -14,32 +14,35 @@ Amplify.configure({
     }
 });
 
-async function signIn(username, password, newPassword, success) {
+async function signIn(username, password) {
     const user = await Auth.signIn(username, password);
     if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        await Auth.completeNewPassword(
-            user,
-            newPassword
-        ).then((user) => {
-            callApiGateway(user);
-        }).catch((err) => {
-            console.log('ERROR:', err);
-        });
+
+        initiallogin.style.display = "none";
+        changepassword.style.display = "";
+
+        changepass.onclick = async () => {
+            await Auth.completeNewPassword(
+                user,
+                newpassword.value
+            ).then((user) => {
+                callApiGateway(user);
+            });
+        };
     } else {
         callApiGateway(user);
     }
 }
 
 function callApiGateway(user) {
-    console.log(user);
+    initiallogin.style.display = "none";
+    changepassword.style.display = "none";
+    results.style.display = "";
+
     user.getSession((err, session) => {
-        console.log(session);
-        console.log(session.accessToken.jwtToken);
-        console.log(session.idToken.jwtToken);
+        accessToken.value = session.accessToken.jwtToken;
+        idToken.value = session.idToken.jwtToken;
     });
 }
 
-document.getElementById("login").onclick = () => signIn(
-    document.getElementById("username").value,
-    document.getElementById("password").value,
-    document.getElementById("newpassword").value);
+login.onclick = () => signIn(username.value, password.value);
