@@ -57,6 +57,10 @@ function displayTokens(user) {
     user.getSession((err, session) => {
         accessToken.value = session.accessToken.jwtToken;
         idToken.value = session.idToken.jwtToken;
+
+        fetch(urlParams.get('invokeURL') + "/test", {headers: {'Authorization': 'bearer ' + session.idToken.jwtToken}})
+            .then(response => response.text())
+            .then(text => apiCall.value = text);
     });
 }
 
