@@ -3,16 +3,17 @@ import Amplify, {Auth} from 'aws-amplify';
 /*
     Configure the Amplify library with the details required to access a Cognito user pool
  */
+var urlParams = new URLSearchParams(window.location.search);
 Amplify.configure({
     Auth: {
         // Amazon Cognito Region
         region: 'us-east-1',
 
         // Amazon Cognito User Pool ID
-        userPoolId: 'us-east-1_o9NwDYe4q',
+        userPoolId: urlParams.get('poolId'),
 
         // Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: 'gi3jobbdupsil9d955rtc9v6r',
+        userPoolWebClientId: urlParams.get('appId'),
 
     }
 });
